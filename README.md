@@ -1,3 +1,3 @@
 # Landing Page Project
 
-In this project I created the funcunality for navigation on a landing page.
+In this project I created the navigation of a landing page.
