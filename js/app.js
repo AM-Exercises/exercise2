@@ -18,15 +18,37 @@ const navElements = document.querySelectorAll('section');
 const navList = document.getElementById('navbar__list');
 
 
+/* Set Nav element with click event listener*/
+
 function setElement(){
     for (let i = 0; i<navElements.length; ++i){
         setNavElement(i);
-
    }
-
 }
 
-//Helper funcion for setting the nav element
+/* Set section element to active when scroll to*/
+
+function setScroll(){
+    window.addEventListener("scroll", ()=> {
+      
+        for (let i=0; i<navElements.length; ++i){
+            let elementScroll = document.getElementById('section'+(i+1));
+            let buttonNav = document.getElementById("section_nav"+(i+1));
+            if (isScrolledIntoView(elementScroll) ){
+                elementScroll.classList.add("active");
+                buttonNav.style.background = "orange";
+               
+            }
+            else{
+                elementScroll.classList.remove("active");
+                buttonNav.style.background = "white";
+            }
+      
+        }
+      });
+}
+
+/*Helper funcion for setting the nav element*/
 
 function setNavElement(i){
     let element = document.createElement('li');
@@ -39,5 +61,22 @@ function setNavElement(i){
     navList.appendChild(element);
 }
 
+/* Function to check if the element is in view*/
+
+function isScrolledIntoView(el){
+    
+        var rect = el.getBoundingClientRect();
+    
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+        );
+    
+}
+
+
 
 setElement();
+setScroll();
